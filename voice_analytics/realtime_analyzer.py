@@ -1,3 +1,7 @@
+# Copyright (c) 2023–2025 Temporal AI Technologies Inc. All rights reserved.
+# Proprietary and Confidential. Subject to license terms.
+# Contact: jorgegonzalez@temporalaitechnologies.com
+
 import numpy as np
 import speech_recognition as sr
 from datetime import datetime
