@@ -1,21 +1,14 @@
 [project]
 name = "temporalvoicesdk"
-version = "0.1.0"
-description = "Temporal Voice SDK - Advanced voice analytics and recognition"
+version = "0.1.1"
+description = "Temporal AI Voice Analytics SDK"
 readme = "README.md"
-license = { file = "LICENSE" }
-authors = [
-    { name = "Temporal AI Technologies Inc.", email = "support@temporalaitechnologies.com" }
-]
 requires-python = ">=3.8"
+authors = [{ name = "Temporal AI Technologies Inc." }]
+license = { text = "Temporal AI Technologies Inc. Proprietary License" }
+dependencies = []
 
-dependencies = [
-    "numpy",
-    "pandas",
-    "plotly",
-    "speechrecognition"
-]
-
-[build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+[project.urls]
+Homepage = "https://github.com/TemporalAITech/TemporalVoiceSDK"
+Repository = "https://github.com/TemporalAITech/TemporalVoiceSDK"
+"Bug Tracker" = "https://github.com/TemporalAITech/TemporalVoiceSDK/issues"
