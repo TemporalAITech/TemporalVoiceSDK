@@ -1,94 +1,86 @@
-# Voice Analytics Package Examples
+# TemporalVoiceSDK — Examples
 
-This directory contains example applications demonstrating how to integrate the Voice Analytics package into various application types.
+This directory contains example applications that demonstrate how to integrate the `TemporalVoiceSDK` into different types of applications.
 
-## Examples Overview
+---
+
+## 📦 Examples Overview
 
 ### 1. Streamlit Integration (`streamlit_integration.py`)
 
-A Streamlit web application that demonstrates how to use Voice Analytics for interactive voice analysis and visualization.
+A Streamlit web application for interactive voice analysis and visualization.
 
-#### Features:
-- Audio file upload and playback
-- Voice pattern analysis with interactive visualizations
-- Customizable visualization types
-- Advanced audio feature extraction
-- Themed interface
+**Features:**
+- Upload and play audio files
+- Analyze voice patterns using `VoiceAnalyzer`
+- Generate radar visualizations using `VoiceVisualizer`
+- Toggle dark/light themes
+- Extract audio features in real-time
 
-#### Running the Example:
+**Run with:**
 ```bash
-# Install required packages
-pip install voice-analytics streamlit
-
-# Run the Streamlit app
+pip install temporalvoicesdk streamlit
 streamlit run streamlit_integration.py
 ```
 
+---
+
 ### 2. Flask API Integration (`flask_integration.py`)
 
-A Flask web API that demonstrates how to use Voice Analytics in a backend service.
+A simple Flask web API showing how to serve the SDK via HTTP.
 
-#### Features:
-- REST API endpoints for voice analysis
+**Features:**
+- REST endpoints for voice analysis
 - Single file and batch processing
-- Interactive visualization generation
-- Simple web interface for testing
+- Dynamic radar chart generation
+- Minimal frontend for quick testing
 
-#### Running the Example:
+**Run with:**
 ```bash
-# Install required packages
-pip install voice-analytics flask
-
-# Create templates directory if it doesn't exist
-mkdir -p templates
-
-# Copy the index.html file to the templates directory
-cp templates/index.html templates/
-
-# Run the Flask app
+pip install temporalvoicesdk flask flask-cors
 python flask_integration.py
 ```
 
-Then open your browser to http://localhost:5000 to see the interface.
+> Open your browser at: http://localhost:5000
 
-## Customizing the Examples
+---
 
-These examples are designed to be starting points for your own applications. Here are some ways you might want to customize them:
+## 🛠 Customization Ideas
 
-### Streamlit Example Customization:
-- Add authentication and user profiles to save analysis history
-- Integrate with your own database to store and retrieve voice metrics
-- Customize the visualization styles and layout
-- Add more advanced voice processing options
+### For Streamlit
 
-### Flask API Customization:
-- Add authentication and API keys for production use
-- Implement user accounts and data persistence
-- Extend with additional visualization endpoints
-- Deploy to a production server with WSGI
+- Add login/auth to store user analysis history
+- Connect to a database to store voice metrics
+- Customize layout and branding for production
 
-## Integration with Other Applications
+### For Flask API
 
-The Voice Analytics package can be integrated into various application types:
+- Add JWT or API key-based authentication
+- Deploy with gunicorn or uvicorn + nginx
+- Add logging, monitoring, and database layers
 
-1. **Desktop Applications:**
-   - Use with PyQt or Tkinter for standalone desktop apps
-   - Integrate with other Python GUI frameworks
+---
 
-2. **Command Line Tools:**
-   - Create CLI tools for batch processing audio files
-   - Include in automation scripts and pipelines
+## 🔌 Other Integration Targets
 
-3. **Backend Services:**
-   - Use as a microservice for voice processing
-   - Integrate with other APIs and services
+You can integrate this SDK into many environments:
 
-4. **Data Science Notebooks:**
-   - Use in Jupyter notebooks for interactive analysis
-   - Combine with other data science libraries
+| App Type              | Integration Notes |
+|-----------------------|-------------------|
+| **Desktop (PyQt, Tkinter)** | Build GUI-based voice tools |
+| **Command Line Tools** | Use in batch processing or automation |
+| **Backend Services**   | Serve as microservice or middleware |
+| **Jupyter Notebooks**  | Interactive data science exploration |
 
-## Additional Resources
+---
 
-- See the main package README for complete API documentation
-- Refer to the inline code comments for implementation details
-- Check the package GitHub repository for updates and new examples
+## 📚 Resources
+
+- Main SDK Documentation: [README.md in root](../README.md)
+- Licensing and usage tiers: [LICENSE](../LICENSE)
+- API Reference: See inline code comments and docstrings
+- SDK Source: [TemporalVoiceSDK on GitHub](https://github.com/TemporalAITech/TemporalVoiceSDK)
+
+---
+
+© 2023–2025 Temporal AI Technologies Inc. All Rights Reserved.
