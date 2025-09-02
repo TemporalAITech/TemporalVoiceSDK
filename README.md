@@ -1,5 +1,5 @@
 # TemporalVoiceSDK
-
+[![PyPI version](https://badge.fury.io/py/temporalvoicesdk.svg)](https://badge.fury.io/py/temporalvoicesdk)
 ### Advanced Voice Pattern Recognition & Visualization  
 © 2023–2025 Temporal AI Technologies Inc. All Rights Reserved.  
 *Proprietary and Confidential. Subject to license terms.*
@@ -127,3 +127,4 @@ if uploaded_file:
 
 This software is licensed under a proprietary license.  
 See the [LICENSE](./LICENSE) file for full terms.
+
