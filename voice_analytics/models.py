@@ -1,5 +1,6 @@
-# Copyright (c) 2023-2025 Temporal AI Technologies Inc. All Rights Reserved.
+# Copyright (c) 2023–2025 Temporal AI Technologies Inc. All rights reserved.
 # Proprietary and Confidential. Subject to license terms.
+# Contact: jorgegonzalez@temporalaitechnologies.com
 
 from dataclasses import dataclass, field
 from typing import Dict, List, Any, Optional
