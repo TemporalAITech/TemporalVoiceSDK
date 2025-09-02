@@ -14,7 +14,7 @@ from voice_analytics.models import VoicePattern, TrainingResult, AudioFeatures
 
 __version__ = '0.1.0'
 __author__ = 'Temporal AI Technologies Inc.'
-__email__ = 'legal@temporalai.com'
+__email__ = 'jorgegonzalez@temporalaitechnologies.com'
 __all__ = [
     'VoiceAnalyzer',
     'RealTimeVoiceAnalyzer',
