@@ -9,7 +9,7 @@ A package for advanced voice pattern recognition and visualization.
 """
 
 from voice_analytics.processor import VoiceAnalyzer
-from voice_analytics.visualizer import VoiceVisualizer
+from voice_analytics.realtime_analyzer import RealTimeVoiceAnalyzer
 from voice_analytics.models import VoicePattern, TrainingResult, AudioFeatures
 
 __version__ = '0.1.0'
