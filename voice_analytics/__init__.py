@@ -1,5 +1,6 @@
-# Copyright (c) 2023-2025 Temporal AI Technologies Inc. All Rights Reserved.
+# Copyright (c) 2023–2025 Temporal AI Technologies Inc. All rights reserved.
 # Proprietary and Confidential. Subject to license terms.
+# Contact: Support@temporalaitechnologies.com
 
 """
 Voice Analytics Package
