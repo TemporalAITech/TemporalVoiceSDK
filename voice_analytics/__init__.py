@@ -13,9 +13,11 @@ from voice_analytics.visualizer import VoiceVisualizer
 from voice_analytics.models import VoicePattern, TrainingResult, AudioFeatures
 
 __version__ = '0.1.0'
+__author__ = 'Temporal AI Technologies Inc.'
+__email__ = 'legal@temporalai.com'
 __all__ = [
     'VoiceAnalyzer',
-    'VoiceVisualizer',
+    'RealTimeVoiceAnalyzer',
     'VoicePattern',
     'TrainingResult',
     'AudioFeatures',
