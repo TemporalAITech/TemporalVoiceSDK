@@ -1,18 +1,15 @@
 from setuptools import setup, find_packages
 
-with open("README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
-
 setup(
-    name="voice-analytics",
+    name="TemporalVoiceSDK",
     version="0.1.0",
     author="Temporal AI Technologies Inc.",
-    author_email="info@temporalai.com",
-    description="A package for advanced voice pattern recognition and visualization",
-    long_description=long_description,
+    author_email="legal@temporalai.com",
+    description="A proprietary SDK for biometric voice analysis and audio pattern visualization.",
+    long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/temporalai/voice-analytics",
-    packages=find_packages(),
+    url="https://github.com/TemporalAITech/TemporalVoiceSDK",
+    packages=find_packages(include=["voice_analytics", "voice_analytics.*"]),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: Other/Proprietary License",
