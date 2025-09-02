@@ -4,7 +4,7 @@ setup(
     name="TemporalVoiceSDK",
     version="0.1.0",
     author="Temporal AI Technologies Inc.",
-    author_email="legal@temporalai.com",
+    author_email="jorgegonzalez@temporalaitechnologies.com",
     description="A proprietary SDK for biometric voice analysis and audio pattern visualization.",
     long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
