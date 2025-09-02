@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Analytics API Demo</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        :root {
+            --primary: #6236FF;
+            --secondary: #00C4B4;
+            --accent: #FF7676;
+            --background: #F9FAFC;
+            --card-bg: #FFFFFF;
+            --text: #1A1F36;
+            --border: #E5E7EB;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background);
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        button:hover {
+            background-color: #5029E0;
+        }
+        
+        .results {
+            margin-top: 2rem;
+        }
+        
+        .metric-card {
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #E5E7EB;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        
+        .progress-value {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+        
+        .text-box {
+            background-color: #F3F4F6;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            white-space: pre-line;
+        }
+        
+        #visualization {
+            width: 100%;
+            height: 500px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Voice Analytics API</h1>
+            <p class="subtitle">Upload audio files to analyze voice patterns and visualize the results</p>
+        </header>
+        
+        <div class="card">
+            <h2 class="card-title">Audio Analysis</h2>
+            <form id="upload-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="audio-file">Upload Audio File:</label>
+                    <input type="file" id="audio-file" name="audio" accept=".wav,.mp3">
+                </div>
+                
+                <div class="form-group">
+                    <label for="visualization-type">Visualization Type:</label>
+                    <select id="visualization-type" name="visualization">
+                        <option value="radar">Radar Chart (Voice Patterns)</option>
+                        <option value="dashboard">Dashboard (Performance Metrics)</option>
+                    </select>
+                </div>
+                
+                <button type="submit">Analyze Voice</button>
+            </form>
+        </div>
+        
+        <div id="results" class="results" style="display: none;">
+            <div class="card">
+                <h2 class="card-title">Analysis Results</h2>
+                
+                <div class="grid" id="metrics-grid">
+                    <!-- Metrics will be added here by JavaScript -->
+                </div>
+                
+                <div id="text-output"></div>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title">Visualization</h2>
+                <div id="visualization"></div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2 class="card-title">Batch Processing</h2>
+            <form id="batch-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="audio-files">Upload Multiple Audio Files:</label>
+                    <input type="file" id="audio-files" name="files" accept=".wav,.mp3" multiple>
+                </div>
+                
+                <button type="submit">Process Batch</button>
+            </form>
+            
+            <div id="batch-results" style="display: none;">
+                <h3>Batch Results</h3>
+                <div id="batch-summary"></div>
+                <div id="batch-items"></div>
+            </div>
+        </div>
+        
+        <footer>
+            Powered by Voice Analytics Package • © 2023-2025 Temporal AI Technologies Inc. • All Rights Reserved
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadForm = document.getElementById('upload-form');
+            const batchForm = document.getElementById('batch-form');
+            const resultsDiv = document.getElementById('results');
+            const metricsGrid = document.getElementById('metrics-grid');
+            const textOutput = document.getElementById('text-output');
+            const visualizationDiv = document.getElementById('visualization');
+            const batchResultsDiv = document.getElementById('batch-results');
+            const batchSummary = document.getElementById('batch-summary');
+            const batchItems = document.getElementById('batch-items');
+            
+            // Handle single file upload and analysis
+            uploadForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(uploadForm);
+                const vizType = document.getElementById('visualization-type').value;
+                
+                try {
+                    // Show loading state
+                    metricsGrid.innerHTML = '<div class="metric-card"><p>Analyzing audio...</p></div>';
+                    resultsDiv.style.display = 'block';
+                    
+                    // Send analysis request
+                    const response = await fetch('/api/analyze', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.error) {
+                        throw new Error(data.error);
+                    }
+                    
+                    // Display metrics
+                    displayMetrics(data);
+                    
+                    // Request visualization
+                    const vizResponse = await fetch('/api/visualize', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            type: vizType,
+                            patterns: data.patterns,
+                            metrics: {
+                                avg_clarity: data.clarity,
+                                avg_emotion: data.emotion,
+                                avg_confidence: data.confidence
+                            }
+                        })
+                    });
+                    
+                    const vizData = await vizResponse.json();
+                    
+                    if (vizData.error) {
+                        throw new Error(vizData.error);
+                    }
+                    
+                    // Display visualization
+                    const figure = JSON.parse(vizData.visualization);
+                    Plotly.newPlot('visualization', figure.data, figure.layout);
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                    metricsGrid.innerHTML = `<div class="metric-card"><p>Error: ${error.message}</p></div>`;
+                }
+            });
+            
+            // Handle batch processing
+            batchForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(batchForm);
+                
+                try {
+                    // Show loading state
+                    batchSummary.innerHTML = '<p>Processing batch...</p>';
+                    batchItems.innerHTML = '';
+                    batchResultsDiv.style.display = 'block';
+                    
+                    // Send batch analysis request
+                    const response = await fetch('/api/batch-analyze', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.error) {
+                        throw new Error(data.error);
+                    }
+                    
+                    // Display batch summary
+                    batchSummary.innerHTML = `
+                        <p>Processed ${data.total_processed} files. ${data.success_count} successful, ${data.total_processed - data.success_count} failed.</p>
+                    `;
+                    
+                    // Display individual results
+                    batchItems.innerHTML = '';
+                    data.batch_results.forEach(result => {
+                        const item = document.createElement('div');
+                        item.className = 'card';
+                        
+                        if (result.error) {
+                            item.innerHTML = `
+                                <h3>${result.filename}</h3>
+                                <p style="color: red;">Error: ${result.error}</p>
+                            `;
+                        } else {
+                            item.innerHTML = `
+                                <h3>${result.filename}</h3>
+                                <div class="grid">
+                                    <div class="metric-card">
+                                        <div class="metric-value">${(result.clarity * 100).toFixed(1)}%</div>
+                                        <div class="metric-label">Clarity</div>
+                                        <div class="progress-bar">
+                                            <div class="progress-value" style="width: ${result.clarity * 100}%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="metric-card">
+                                        <div class="metric-value">${(result.emotion * 100).toFixed(1)}%</div>
+                                        <div class="metric-label">Emotion</div>
+                                        <div class="progress-bar">
+                                            <div class="progress-value" style="width: ${result.emotion * 100}%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="metric-card">
+                                        <div class="metric-value">${(result.confidence * 100).toFixed(1)}%</div>
+                                        <div class="metric-label">Confidence</div>
+                                        <div class="progress-bar">
+                                            <div class="progress-value" style="width: ${result.confidence * 100}%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            if (result.text) {
+                                item.innerHTML += `
+                                    <div class="text-box">${result.text}</div>
+                                `;
+                            }
+                        }
+                        
+                        batchItems.appendChild(item);
+                    });
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                    batchSummary.innerHTML = `<p>Error: ${error.message}</p>`;
+                }
+            });
+            
+            // Helper function to display metrics
+            function displayMetrics(data) {
+                metricsGrid.innerHTML = '';
+                
+                // Create metric cards
+                const metrics = [
+                    { label: 'Clarity', value: data.clarity },
+                    { label: 'Emotion', value: data.emotion },
+                    { label: 'Confidence', value: data.confidence }
+                ];
+                
+                metrics.forEach(metric => {
+                    const card = document.createElement('div');
+                    card.className = 'metric-card';
+                    card.innerHTML = `
+                        <div class="metric-value">${(metric.value * 100).toFixed(1)}%</div>
+                        <div class="metric-label">${metric.label}</div>
+                        <div class="progress-bar">
+                            <div class="progress-value" style="width: ${metric.value * 100}%"></div>
+                        </div>
+                    `;
+                    metricsGrid.appendChild(card);
+                });
+                
+                // Display transcribed text if available
+                if (data.text) {
+                    textOutput.innerHTML = `
+                        <h3>Transcribed Text:</h3>
+                        <div class="text-box">${data.text}</div>
+                    `;
+                } else {
+                    textOutput.innerHTML = '';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
